@@ -16,8 +16,8 @@ import csv
 
 #img = cv2.imread("K20-30-0,95_1.jpg")
 #cap = cv2.VideoCapture('22-30-0,95.mp4')
-# cap = cv2.VideoCapture('testvideo.mp4')
-cap = cv2.VideoCapture('C:/Users/sotto/PycharmProjects/IP_Laser_pycv/testvideo.mp4')
+cap = cv2.VideoCapture('testvideo.mp4')
+# cap = cv2.VideoCapture('C:/Users/sotto/PycharmProjects/IP_Laser_pycv/testvideo.mp4')
 
 start_time = datetime.now()
 i = 0
