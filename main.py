@@ -1,3 +1,12 @@
+__author__ = "Yannick Ruppert, Sven-David Otto, Klaus Keusch"
+__copyright__ = "Copyright 2007, The Cogent Project"
+__credits__ = ["Yannick Ruppert, Sven-David Otto, Klaus Keusch"]
+__license__ = "tba"
+__version__ = "0.1"
+__maintainer__ = "Klaus Keusch"
+__email__ = "klaus.keusch@htwsaar.de"
+__status__ = "Development"
+
 from xml.etree.ElementTree import tostring
 import cv2
 
