@@ -46,10 +46,6 @@ list1 = [0, 0] * 1000
 list2 = [0] * 1000
 s = 0
 
-
-
-
-
 while True:
     _, img = cap.read()
 
