@@ -40,10 +40,7 @@ while True:
     # Create a threshold
     ret, thresh2 = cv2.threshold(res, 100, 155, cv2.THRESH_BINARY)
 
-
-
     cv2.circle(thresh2, (555, 390), 2, (255, 255, 255), 2)
-
 
     contours, heirarchy = cv2.findContours(thresh2 ,cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 
@@ -69,9 +66,6 @@ while True:
         # list1[i] = (x2, y2)
         # list2[i] = y2
         # i = i + 1
-
-
-    # INSERT YOUR CODE
 
     time_elapsed = datetime.now() - start_time
     #print ('%s' % (time_elapsed.seconds))
