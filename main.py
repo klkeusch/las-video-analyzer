@@ -29,7 +29,7 @@ for arguments in args:
 videofile = "{}".format(args[0])
 
 cap = cv2.VideoCapture(videofile)
-
+# img = cv2.imread("K20-30-0,95_1.jpg")
 start_time = datetime.now()
 i = 0
 z = 0
@@ -212,10 +212,20 @@ while True:
             (0, 0, 255),
         )
 
-    print("{}".format(y2))
+        # y2 Meltpoolbreite
+    data = {
+        y2,
+        x2
+    }
+
+    df = pd.DataFrame(data)
+    print(df)
+
+    # print("{}".format(y2))
+
     # cv2.imshow("Gray", gray)
     # cv2.imshow("thresh2", thresh2)
-    # cv2.imshow("Result_Mask", res)
+    # cv2.imshow("Result_Mask", res)image.png
     # cv2.imshow("Rect", img_rect)
     # cv2.imshow("Polylines", img_polylines)
     # cv2.imshow("thresh3", thresh3)
