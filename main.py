@@ -26,16 +26,12 @@ import os, sys
 args = sys.argv[1:]
 print(os.path.dirname(os.path.abspath(sys.argv[0])))
 
-for arguments in args:
-    print(arguments)
+# for arguments in args:
+#     print(arguments)
 
 videofile = "{}".format(args[0])
-print("Datei: {}".format(videofile))
+print("Loaded video file: {}".format(videofile))
 
-# img = cv2.imread("K20-30-0,95_1.jpg")
-# cap = cv2.VideoCapture('22-30-0,95.mp4')
-# cap = cv2.VideoCapture('testvideo.mp4')
-# cap = cv2.VideoCapture('C:/Users/sotto/PycharmProjects/IP_Laser_pycv/testvideo.mp4')
 cap = cv2.VideoCapture(videofile)
 
 if not cap.isOpened():
