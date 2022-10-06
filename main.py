@@ -24,7 +24,7 @@ import csv
 import os, sys
 
 args = sys.argv[1:]
-print(os.path.dirname(os.path.abspath(sys.argv[0])))
+# print(os.path.dirname(os.path.abspath(sys.argv[0])))
 
 start_time = datetime.now()
 i = 0
@@ -39,11 +39,8 @@ position_text_top = 25
 position_text_bottom = 680
 position_text_right_side = 750
 
-# for arguments in args:
-#     print(arguments)
-
 videofile = "{}".format(args[0])
-print("Loaded video file: {}".format(videofile))
+print("Loaded video file: {} at {}".format(videofile, start_time))
 
 cap = cv2.VideoCapture(videofile)
 
@@ -175,7 +172,7 @@ while True:
             (0, 0, 255),
         )
 
-    cv2.imshow("Current measuring: {}".format(videofile), img)
+    cv2.imshow("Active video file: {}".format(videofile), img)
 
     key = cv2.waitKey(1)
 
