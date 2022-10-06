@@ -101,8 +101,8 @@ while True:
     time_elapsed = datetime.now() - start_time
 
     z = int(time_elapsed.seconds) - s
-    if z > 0.5:
-        s = s + 0.5
+    if z > 1:
+        s = s + 1
 
         list1[i] = (x2, y2)
         list2[i] = y2
@@ -133,6 +133,7 @@ while True:
             1.5,
             (0, 0, 255),
         )
+
         cv2.putText(
             img,
             "Meltpool width: {}".format(round(y2, 1)),
@@ -141,6 +142,7 @@ while True:
             1.5,
             (0, 0, 255),
         )
+
         cv2.putText(
             img,
             "Duration = " + str(minutes) + ":" + str(round(seconds, 2)),
@@ -149,6 +151,7 @@ while True:
             1.5,
             (0, 0, 255),
         )
+
         cv2.putText(
             img,
             "Time elapsed = {}".format(time_elapsed),
@@ -157,6 +160,7 @@ while True:
             1.5,
             (0, 0, 255),
         )
+
         cv2.putText(
             img,
             "Time elapsed (sec) = {}".format("%s" % (time_elapsed.seconds)),
@@ -165,6 +169,7 @@ while True:
             1.5,
             (0, 0, 255),
         )
+
         cv2.putText(
             img,
             "Measurements = {}".format(i),
@@ -174,7 +179,7 @@ while True:
             (0, 0, 255),
         )
 
-    cv2.imshow("Image", img) 
+    cv2.imshow("Current measuring: {}".format(videofile), img) 
 
     key = cv2.waitKey(1)
 
