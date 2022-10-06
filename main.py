@@ -1,3 +1,12 @@
+__author__ = "Yannick Ruppert, Sven-David Otto, Klaus Keusch"
+__copyright__ = "Copyright 2007, The Cogent Project"
+__credits__ = ["Yannick Ruppert, Sven-David Otto, Klaus Keusch"]
+__license__ = "tba"
+__version__ = "0.1"
+__maintainer__ = "Klaus Keusch"
+__email__ = "klaus.keusch@htwsaar.de"
+__status__ = "Development"
+
 import cv2
 import matplotlib.pyplot as plt
 import numpy as np
@@ -11,13 +20,21 @@ import keyboard
 import xlsxwriter
 import csv
 
+import os, sys
 
+args = sys.argv[1:]
+print(os.path.dirname(os.path.abspath(sys.argv[0])))
 
+for arguments in args:
+    print(arguments)
+
+videofile = "{}".format(args[0])
 
 #img = cv2.imread("K20-30-0,95_1.jpg")
 #cap = cv2.VideoCapture('22-30-0,95.mp4')
-cap = cv2.VideoCapture('testvideo.mp4')
+# cap = cv2.VideoCapture('testvideo.mp4')
 # cap = cv2.VideoCapture('C:/Users/sotto/PycharmProjects/IP_Laser_pycv/testvideo.mp4')
+cap = cv2.VideoCapture(videofile)
 
 start_time = datetime.now()
 i = 0
