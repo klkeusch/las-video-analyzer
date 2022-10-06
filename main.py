@@ -174,10 +174,13 @@ while True:
 
     cv2.imshow("Active video file: {}".format(videofile), img)
 
-    key = cv2.waitKey(1)
+    #key = cv2.waitKey(1)
 
-    if key == ord("q"):
-        print("Abort - stop key pressed")
+    #if key == ord("q"):
+    #    print("Abort - stop key pressed")
+    #    break
+    if cv2.waitKey(5) & 0xFF == ord('q'):
+        print("Abort")
         break
 
 csv_filename = "{}.csv".format(videofile)
