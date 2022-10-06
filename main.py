@@ -51,11 +51,9 @@ list2 = [0] * 1000
 s = 0
 
 position_text_left_side = 25
-position_text_left_side_top_y = 25
-position_text_left_side_bottom_y = 680
-
-position_text_right_side = 780
-position_text_right_side_bottom = 100
+position_text_top= 25
+position_text_bottom = 680
+position_text_right_side = 750
 
 while True:
     ret, img = cap.read()
@@ -94,7 +92,8 @@ while True:
     )
 
     fps = cap.get(cv2.CAP_PROP_FPS)  # OpenCV v2.x used "CV_CAP_PROP_FPS"
-    frame_count = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+    # frame_count = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))   # original int cast entfernt
+    frame_count = cap.get(cv2.CAP_PROP_FRAME_COUNT)
     duration = frame_count / fps
     minutes = int(duration / 60)
     seconds = duration % 60
@@ -102,8 +101,8 @@ while True:
     time_elapsed = datetime.now() - start_time
 
     z = int(time_elapsed.seconds) - s
-    if z > 1:
-        s = s + 1
+    if z > 0.5:
+        s = s + 0.5
 
         list1[i] = (x2, y2)
         list2[i] = y2
@@ -120,7 +119,7 @@ while True:
         cv2.putText(
             img,
             "Stop measurement: press q",
-            (position_text_left_side , position_text_left_side_top_y),
+            (position_text_left_side , position_text_top),
             cv2.FONT_HERSHEY_PLAIN,
             1.5,
             (0, 0, 255),
@@ -128,16 +127,16 @@ while True:
 
         cv2.putText(
             img,
-            "Meltpoollaenge: {}".format(round(x2, 1)),
-            (position_text_left_side, position_text_left_side_top_y + 35),
+            "Meltpool length: {}".format(round(x2, 1)),
+            (position_text_left_side, position_text_top + 35),
             cv2.FONT_HERSHEY_PLAIN,
             1.5,
             (0, 0, 255),
         )
         cv2.putText(
             img,
-            "Meltpoolbreite: {}".format(round(y2, 1)),
-            (position_text_left_side, position_text_left_side_top_y + 60),
+            "Meltpool width: {}".format(round(y2, 1)),
+            (position_text_left_side, position_text_top + 60),
             cv2.FONT_HERSHEY_PLAIN,
             1.5,
             (0, 0, 255),
@@ -145,7 +144,7 @@ while True:
         cv2.putText(
             img,
             "Duration = " + str(minutes) + ":" + str(round(seconds, 2)),
-            (position_text_right_side, position_text_left_side_bottom_y + 30),
+            (position_text_right_side, position_text_bottom + 30),
             cv2.FONT_HERSHEY_PLAIN,
             1.5,
             (0, 0, 255),
@@ -153,7 +152,7 @@ while True:
         cv2.putText(
             img,
             "Time elapsed = {}".format(time_elapsed),
-            (position_text_left_side, position_text_left_side_bottom_y + 30),
+            (position_text_left_side, position_text_bottom + 30),
             cv2.FONT_HERSHEY_PLAIN,
             1.5,
             (0, 0, 255),
@@ -161,21 +160,21 @@ while True:
         cv2.putText(
             img,
             "Time elapsed (sec) = {}".format("%s" % (time_elapsed.seconds)),
-            (position_text_left_side, position_text_left_side_bottom_y),
+            (position_text_left_side, position_text_bottom),
             cv2.FONT_HERSHEY_PLAIN,
             1.5,
             (0, 0, 255),
         )
         cv2.putText(
             img,
-            "Counter = {}".format(i),
-            (position_text_right_side, position_text_left_side_bottom_y),
+            "Measurements = {}".format(i),
+            (position_text_right_side, position_text_bottom),
             cv2.FONT_HERSHEY_PLAIN,
             1.5,
             (0, 0, 255),
         )
 
-    cv2.imshow("Image", img)
+    cv2.imshow("Image", img) 
 
     key = cv2.waitKey(1)
 
@@ -192,4 +191,4 @@ with open(csv_filename, "w", newline="") as f:
 print("Measurements saved in file {}".format(csv_filename))
 
 cap.release()
-cv2.destroyAllWindows()
+# cv2.destroyAllWindows()
