@@ -181,7 +181,6 @@ while True:
         break
 
 csv_filename = "{}.csv".format(videofile)
-# with open("{}.csv".format(videofile), "w", newline="") as f:
 with open(csv_filename, "w", newline="") as f:
     writer = csv.writer(f)
     writer.writerow(list1)
@@ -189,4 +188,4 @@ with open(csv_filename, "w", newline="") as f:
 print("Measurements saved in file {}".format(csv_filename))
 
 cap.release()
-# cv2.destroyAllWindows()
+cv2.destroyAllWindows()
