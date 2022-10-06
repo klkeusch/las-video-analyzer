@@ -59,7 +59,7 @@ while True:
     ret, img = cap.read()
 
     if not ret:
-        print("End of File")
+        print("End of File?")
         break
 
     # Convert Image to grayscale
