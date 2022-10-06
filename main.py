@@ -36,6 +36,10 @@ videofile = "{}".format(args[0])
 # cap = cv2.VideoCapture('C:/Users/sotto/PycharmProjects/IP_Laser_pycv/testvideo.mp4')
 cap = cv2.VideoCapture(videofile)
 
+if not cap.isOpened():
+    print("Cannot open media")
+    exit()
+
 start_time = datetime.now()
 i = 0
 z = 0
