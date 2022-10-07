@@ -29,7 +29,9 @@ args = sys.argv[1:]
 start_time = datetime.now()
 i = 0
 z = 0
-list1 = [0, 0] * 1000
+### Änderungen KK
+# list1 = [0, 0] * 1000
+list1 = [0] * 1000
 list2 = [0] * 1000
 
 s = 0
@@ -97,7 +99,9 @@ while True:
     if z > 1:
         s = s + 1
 
-        list1[i] = (x2, y2)
+        ### Änderungen KK
+        # list1[i] = (x2, y2)
+        list1[i] = (x2)
         list2[i] = y2
         i = i + 1
         print("Measuring...({})".format(i))
@@ -189,6 +193,10 @@ with open(csv_filename, "w", newline="") as f:
     writer.writerow(list1)
 
 print("Measurements saved in file {}".format(csv_filename))
-
+###Änderungen KK
+print(list1)
+print("#######################################")
+print(list2)
+### 
 cap.release()
 cv2.destroyAllWindows()
