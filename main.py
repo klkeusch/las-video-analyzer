@@ -192,15 +192,11 @@ while True:
 # Width y2 list2
 measured_data = [list1, list2]
 export_measured_data = zip_longest(*measured_data, fillvalue='')
+
 csv_filename = "{}.csv".format(videofile)
 with open(csv_filename, "w", newline="") as f: #add encoding ?
     writer = csv.writer(f)
-    # writer.writerow(list1)
-    # writer.writerows(
-    #    [list1,
-    #    list2]
-    # )
-    writer.writerow(("list1", "list2"))
+    writer.writerow(("Meltpool length", "Meltpool width"))
     writer.writerows(export_measured_data)
 
 
