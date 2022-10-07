@@ -52,8 +52,7 @@ if not cap.isOpened():
     exit()
 
 fps = cap.get(cv2.CAP_PROP_FPS)  # OpenCV v2.x used "CV_CAP_PROP_FPS"
-# frame_count = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))   # original int cast entfernt
-frame_count = cap.get(cv2.CAP_PROP_FRAME_COUNT)
+frame_count = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))   # original int cast entfernt
 duration = frame_count / fps
 minutes = int(duration / 60)
 seconds = duration % 60
@@ -95,21 +94,12 @@ while True:
         mask, [largest_areas[-1]], 0, (255, 255, 255, 255), 1
     )
 
-    # fps = cap.get(cv2.CAP_PROP_FPS)  # OpenCV v2.x used "CV_CAP_PROP_FPS"
-    # frame_count = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))   # original int cast entfernt
-    # frame_count = cap.get(cv2.CAP_PROP_FRAME_COUNT)
-    # duration = frame_count / fps
-    # minutes = int(duration / 60)
-    # seconds = duration % 60
-
     time_elapsed = datetime.now() - start_time
 
     z = int(time_elapsed.seconds) - s
     if z > 1:
         s = s + 1
 
-        ### Änderungen KK
-        # list1[i] = (x2, y2)
         list1[i] = (x2)
         list2[i] = y2
         i = i + 1
@@ -187,11 +177,6 @@ while True:
 
     cv2.imshow("Active video file: {}".format(videofile), img)
 
-    #key = cv2.waitKey(1)
-
-    #if key == ord("q"):
-    #    print("Abort - stop key pressed")
-    #    break
     if cv2.waitKey(3) & 0xFF == ord('q'):
         print("Aborted")
         break
@@ -207,12 +192,7 @@ with open(csv_filename, "w", newline="") as f: #add encoding ?
     writer.writerow(("Meltpool length", "Meltpool width"))
     writer.writerows(export_measured_data)
 
-
 print("Measurements saved in file {}".format(csv_filename))
-###Änderungen KK
-print(list1)
-print("#######################################")
-print(list2)
-### 
+
 cap.release()
 cv2.destroyAllWindows()
