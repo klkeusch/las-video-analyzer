@@ -7,56 +7,51 @@ __maintainer__ = "Klaus Keusch"
 __email__ = "klaus.keusch@htwsaar.de"
 __status__ = "Development"
 
+import sys
 from itertools import zip_longest
 import cv2
-import matplotlib.pyplot as plt
 import numpy as np
-import pandas as pd
-import matplotlib.image as mpimg
-import openpyxl
-import time
-
-# from timer import Timer
 from datetime import datetime
-import keyboard
-import xlsxwriter
 import csv
 
-import os, sys
+# Command line arguments
+if len(sys.argv) != 2:
+    print("Check your input file! \ne.g. <program.py> <videofile.type>")
+    exit()
 
 args = sys.argv[1:]
-# print(os.path.dirname(os.path.abspath(sys.argv[0])))
 
+# Vars
 start_time = datetime.now()
+videofile = "{}".format(args[0])
+sampling_rate = 1
 i = 0
 z = 0
-### Änderungen KK
-# list1 = [0, 0] * 1000
-list1 = [0] * 1000
-list2 = [0] * 1000
-
 s = 0
+length_arr = [0] * 1000
+width_arr = [0] * 1000
 
+# GUI
 position_text_left_side = 25
 position_text_top = 25
 position_text_bottom = 680
 position_text_right_side = 750
 
-videofile = "{}".format(args[0])
+# Main
 print("Loaded video file: {} at {}".format(videofile, start_time))
 
+# Source
 cap = cv2.VideoCapture(videofile)
 
 if not cap.isOpened():
     print("Cannot open media")
     exit()
 
-fps = cap.get(cv2.CAP_PROP_FPS)  # OpenCV v2.x used "CV_CAP_PROP_FPS"
-frame_count = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))   # original int cast entfernt
+fps = cap.get(cv2.CAP_PROP_FPS)
+frame_count = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
 duration = frame_count / fps
 minutes = int(duration / 60)
 seconds = duration % 60
-
 
 while True:
     ret, img = cap.read()
@@ -79,7 +74,7 @@ while True:
 
     cv2.circle(thresh2, (555, 390), 2, (255, 255, 255), 2)
 
-    contours, heirarchy = cv2.findContours(
+    contours, hierarchy = cv2.findContours(
         thresh2, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE
     )
 
@@ -97,12 +92,11 @@ while True:
     time_elapsed = datetime.now() - start_time
 
     z = int(time_elapsed.seconds) - s
-    if z > 1:
-        s = s + 1
-
-        list1[i] = (x2)
-        list2[i] = y2
-        i = i + 1
+    if z > sampling_rate:
+        s += sampling_rate
+        length_arr[i] = x2
+        width_arr[i] = y2
+        i += 1
         print("Measuring...({})".format(i))
 
     # Draw boundaries
@@ -177,17 +171,15 @@ while True:
 
     cv2.imshow("Active video file: {}".format(videofile), img)
 
-    if cv2.waitKey(5) & 0xFF == ord('q'):
-        print("Aborted")
+    if cv2.waitKey(5) & 0xFF == ord("q"):
+        print("Aborted by user!")
         break
 
-# Length x2 list1
-# Width y2 list2
-measured_data = [list1, list2]
-export_measured_data = zip_longest(*measured_data, fillvalue='')
+measured_data = [length_arr, width_arr]
+export_measured_data = zip_longest(*measured_data, fillvalue="")
 
 csv_filename = "{}.csv".format(videofile)
-with open(csv_filename, "w", newline="") as f: #add encoding ?
+with open(csv_filename, "w", newline="") as f:
     writer = csv.writer(f)
     writer.writerow(("Meltpool length", "Meltpool width"))
     writer.writerows(export_measured_data)
