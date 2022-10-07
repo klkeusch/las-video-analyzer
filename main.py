@@ -177,7 +177,7 @@ while True:
 
     cv2.imshow("Active video file: {}".format(videofile), img)
 
-    if cv2.waitKey(3) & 0xFF == ord('q'):
+    if cv2.waitKey(5) & 0xFF == ord('q'):
         print("Aborted")
         break
 
