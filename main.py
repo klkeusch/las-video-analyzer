@@ -51,6 +51,14 @@ if not cap.isOpened():
     print("Cannot open media")
     exit()
 
+fps = cap.get(cv2.CAP_PROP_FPS)  # OpenCV v2.x used "CV_CAP_PROP_FPS"
+# frame_count = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))   # original int cast entfernt
+frame_count = cap.get(cv2.CAP_PROP_FRAME_COUNT)
+duration = frame_count / fps
+minutes = int(duration / 60)
+seconds = duration % 60
+
+
 while True:
     ret, img = cap.read()
 
@@ -87,12 +95,12 @@ while True:
         mask, [largest_areas[-1]], 0, (255, 255, 255, 255), 1
     )
 
-    fps = cap.get(cv2.CAP_PROP_FPS)  # OpenCV v2.x used "CV_CAP_PROP_FPS"
+    # fps = cap.get(cv2.CAP_PROP_FPS)  # OpenCV v2.x used "CV_CAP_PROP_FPS"
     # frame_count = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))   # original int cast entfernt
-    frame_count = cap.get(cv2.CAP_PROP_FRAME_COUNT)
-    duration = frame_count / fps
-    minutes = int(duration / 60)
-    seconds = duration % 60
+    # frame_count = cap.get(cv2.CAP_PROP_FRAME_COUNT)
+    # duration = frame_count / fps
+    # minutes = int(duration / 60)
+    # seconds = duration % 60
 
     time_elapsed = datetime.now() - start_time
 
@@ -184,8 +192,8 @@ while True:
     #if key == ord("q"):
     #    print("Abort - stop key pressed")
     #    break
-    if cv2.waitKey(5) & 0xFF == ord('q'):
-        print("Abort")
+    if cv2.waitKey(3) & 0xFF == ord('q'):
+        print("Aborted")
         break
 
 # Length x2 list1
