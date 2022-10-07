@@ -7,6 +7,7 @@ __maintainer__ = "Klaus Keusch"
 __email__ = "klaus.keusch@htwsaar.de"
 __status__ = "Development"
 
+from itertools import zip_longest
 import cv2
 import matplotlib.pyplot as plt
 import numpy as np
@@ -187,10 +188,21 @@ while True:
         print("Abort")
         break
 
+# Length x2 list1
+# Width y2 list2
+measured_data = [list1, list2]
+export_measured_data = zip_longest(*measured_data, fillvalue='')
 csv_filename = "{}.csv".format(videofile)
-with open(csv_filename, "w", newline="") as f:
+with open(csv_filename, "w", newline="") as f: #add encoding ?
     writer = csv.writer(f)
-    writer.writerow(list1)
+    # writer.writerow(list1)
+    # writer.writerows(
+    #    [list1,
+    #    list2]
+    # )
+    writer.writerow(("list1", "list2"))
+    writer.writerows(export_measured_data)
+
 
 print("Measurements saved in file {}".format(csv_filename))
 ###Änderungen KK
