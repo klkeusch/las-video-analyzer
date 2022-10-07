@@ -29,7 +29,7 @@ i = 0
 z = 0
 s = 0
 length_arr = [0] * 1000
-width_arr = [0] * 1000
+height_arr = [0] * 1000
 
 # GUI
 position_text_left_side = 25
@@ -95,7 +95,7 @@ while True:
     if z > sampling_rate:
         s += sampling_rate
         length_arr[i] = x2
-        width_arr[i] = y2
+        height_arr[i] = y2
         i += 1
         print("Measuring...({})".format(i))
 
@@ -126,7 +126,7 @@ while True:
 
         cv2.putText(
             img,
-            "Meltpool width: {}".format(round(y2, 1)),
+            "Meltpool height: {}".format(round(y2, 1)),
             (position_text_left_side, position_text_top + 60),
             cv2.FONT_HERSHEY_PLAIN,
             1.5,
@@ -175,13 +175,13 @@ while True:
         print("Aborted by user!")
         break
 
-measured_data = [length_arr, width_arr]
+measured_data = [length_arr, height_arr]
 export_measured_data = zip_longest(*measured_data, fillvalue="")
 
 csv_filename = "{}.csv".format(videofile)
 with open(csv_filename, "w", newline="") as f:
     writer = csv.writer(f)
-    writer.writerow(("Meltpool length", "Meltpool width"))
+    writer.writerow(("Meltpool length", "Meltpool height"))
     writer.writerows(export_measured_data)
 
 print("Measurements saved in file {}".format(csv_filename))
