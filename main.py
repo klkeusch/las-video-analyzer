@@ -25,9 +25,9 @@ args = sys.argv[1:]
 start_time = datetime.now()
 videofile = "{}".format(args[0])
 sampling_rate = 1
-i = 0
-z = 0
-s = 0
+measurment_number = 0
+frame_rate = 0
+frame_count_sampling = 0
 length_arr = [0] * 1000
 height_arr = [0] * 1000
 
@@ -52,6 +52,8 @@ frame_count = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
 duration = frame_count / fps
 minutes = int(duration / 60)
 seconds = duration % 60
+
+print("Frame rate: ", int(fps), "FPS")
 
 while True:
     ret, img = cap.read()
@@ -91,13 +93,14 @@ while True:
 
     time_elapsed = datetime.now() - start_time
 
-    z = int(time_elapsed.seconds) - s
-    if z > sampling_rate:
-        s += sampling_rate
-        length_arr[i] = x2
-        height_arr[i] = y2
-        i += 1
-        print("Measuring...({})".format(i))
+    frame_rate = int(fps)
+    if frame_count_sampling >= (frame_rate*sampling_rate):
+        length_arr[measurment_number] = x2
+        measurment_number += 1
+        height_arr[measurment_number] = y2
+        print("Measuring...({})".format(measurment_number))
+        frame_count_sampling = 0
+    else: frame_count_sampling +=1
 
     # Draw boundaries
     for cnt in contours:
@@ -162,7 +165,7 @@ while True:
 
         cv2.putText(
             img,
-            "Measurements = {}".format(i),
+            "Measurements = {}".format(measurment_number),
             (position_text_right_side, position_text_bottom),
             cv2.FONT_HERSHEY_PLAIN,
             1.5,
@@ -184,6 +187,8 @@ with open(csv_filename, "w", newline="") as f:
     writer.writerow(("Meltpool length", "Meltpool height"))
     writer.writerows(export_measured_data)
 
+print("Media playing time in seconds = {}".format("%s" % (time_elapsed.seconds)))
+print("Numer of measurements taken {}".format(measurment_number))
 print("Measurements saved in file {}".format(csv_filename))
 
 cap.release()
