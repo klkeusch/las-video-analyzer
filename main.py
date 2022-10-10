@@ -44,7 +44,7 @@ print("Loaded video file: {} at {}".format(videofile, start_time))
 cap = cv2.VideoCapture(videofile)
 
 if not cap.isOpened():
-    print("Cannot open media")
+    print("Cannot open media!")
     exit()
 
 fps = cap.get(cv2.CAP_PROP_FPS)
@@ -53,7 +53,7 @@ duration = frame_count / fps
 minutes = int(duration / 60)
 seconds = duration % 60
 
-print("Frame rate: ", int(fps), "FPS")
+print("Frame rate: {} FPS" .format(int(fps)))
 
 while True:
     ret, img = cap.read()
@@ -138,7 +138,7 @@ while True:
 
         cv2.putText(
             img,
-            "Duration = " + str(minutes) + ":" + str(round(seconds, 2)),
+            "Duration: " + str(minutes) + ":" + str(round(seconds, 2)),
             (position_text_right_side, position_text_bottom + 30),
             cv2.FONT_HERSHEY_PLAIN,
             1.5,
@@ -147,7 +147,7 @@ while True:
 
         cv2.putText(
             img,
-            "Time elapsed = {}".format(time_elapsed),
+            "Time elapsed: {}".format(time_elapsed),
             (position_text_left_side, position_text_bottom + 30),
             cv2.FONT_HERSHEY_PLAIN,
             1.5,
@@ -156,7 +156,7 @@ while True:
 
         cv2.putText(
             img,
-            "Time elapsed (sec) = {}".format("%s" % (time_elapsed.seconds)),
+            "Time elapsed (sec): {}".format("%s" % (time_elapsed.seconds)),
             (position_text_left_side, position_text_bottom),
             cv2.FONT_HERSHEY_PLAIN,
             1.5,
@@ -187,9 +187,9 @@ with open(csv_filename, "w", newline="") as f:
     writer.writerow(("Meltpool length", "Meltpool height"))
     writer.writerows(export_measured_data)
 
-print("Media playback time in seconds = {}".format("%s" % (time_elapsed.seconds)))
-print("Number of measurements taken {}".format(measurment_number))
-print("Measurements saved in file {}".format(csv_filename))
+print("Media playback time in seconds: {}".format("%s" % (time_elapsed.seconds)))
+print("Number of measurements taken: {}".format(measurment_number))
+print("Measurements saved in file: {}".format(csv_filename))
 
 cap.release()
 cv2.destroyAllWindows()
