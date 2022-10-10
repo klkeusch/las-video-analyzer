@@ -187,8 +187,8 @@ with open(csv_filename, "w", newline="") as f:
     writer.writerow(("Meltpool length", "Meltpool height"))
     writer.writerows(export_measured_data)
 
-print("Media playing time in seconds = {}".format("%s" % (time_elapsed.seconds)))
-print("Numer of measurements taken {}".format(measurment_number))
+print("Media playback time in seconds = {}".format("%s" % (time_elapsed.seconds)))
+print("Number of measurements taken {}".format(measurment_number))
 print("Measurements saved in file {}".format(csv_filename))
 
 cap.release()
