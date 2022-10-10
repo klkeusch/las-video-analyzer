@@ -1,11 +1,11 @@
 __author__ = "Yannick Ruppert, Sven-David Otto, Klaus Keusch"
-__copyright__ = "Copyright 2007, The Cogent Project"
+__copyright__ = "htw saar"
 __credits__ = ["Yannick Ruppert, Sven-David Otto, Klaus Keusch"]
 __license__ = "tba"
-__version__ = "0.1"
+__version__ = "1.0"
 __maintainer__ = "Klaus Keusch"
 __email__ = "klaus.keusch@htwsaar.de"
-__status__ = "Development"
+__status__ = "Testing"
 
 import sys
 from itertools import zip_longest
