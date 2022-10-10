@@ -94,13 +94,13 @@ while True:
     time_elapsed = datetime.now() - start_time
 
     frame_rate = int(fps)
-    if frame_count_sampling >= (frame_rate*sampling_rate):
+    if frame_count_sampling >= (frame_rate * sampling_rate):
         length_arr[measurment_number] = x2
-        measurment_number += 1
         height_arr[measurment_number] = y2
+        measurment_number += 1
         print("Measuring...({})".format(measurment_number))
         frame_count_sampling = 0
-    else: frame_count_sampling +=1
+    else: frame_count_sampling += 1
 
     # Draw boundaries
     for cnt in contours:
@@ -174,7 +174,7 @@ while True:
 
     cv2.imshow("Active video file: {}".format(videofile), img)
 
-    if cv2.waitKey(5) & 0xFF == ord("q"):
+    if cv2.waitKey(1) & 0xFF == ord("q"):
         print("Aborted by user!")
         break
 
