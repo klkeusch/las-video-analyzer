@@ -22,9 +22,12 @@ if len(sys.argv) != 2:
 args = sys.argv[1:]
 
 # Vars
+# sampling_rate zur Erhoehung der Messzeit, '1 fuer 1 Sekunde', '2 fuer 2 Sekunden', etc. bei 'sampling_divisor = 1'
+# sampling_divisor zur Verkleinerung der Messzeit, 1'fuer 1 Sekunde', '2 fuer 0.5 Sekunden', 3 für 0.33 Sekunden', etc. bei 'sampling_rate = 1'
 start_time = datetime.now()
 videofile = "{}".format(args[0])
 sampling_rate = 1
+sampling_divisor = 1
 measurment_number = 0
 frame_rate = 0
 frame_count_sampling = 0
@@ -100,7 +103,7 @@ while True:
         measurment_number += 1
         print("Measuring...({})".format(measurment_number))
         frame_count_sampling = 0
-    else: frame_count_sampling += 1
+    else: frame_count_sampling += sampling_divisor
 
     # Draw boundaries
     for cnt in contours:
