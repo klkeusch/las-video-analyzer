@@ -27,12 +27,12 @@ args = sys.argv[1:]
 start_time = datetime.now()
 videofile = "{}".format(args[0])
 sampling_rate = 1
-sampling_divisor = 1
+sampling_divisor = 6
 measurment_number = 0
 frame_rate = 0
 frame_count_sampling = 0
-length_arr = [0] * 1000
-height_arr = [0] * 1000
+length_arr = [0] * 10000
+height_arr = [0] * 10000
 
 # GUI
 position_text_left_side = 25
